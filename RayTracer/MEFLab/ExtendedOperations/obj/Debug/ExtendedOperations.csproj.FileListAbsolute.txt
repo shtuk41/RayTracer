@@ -1,0 +1,5 @@
+C:\Users\Aleksander\Desktop\Projects\MEFLab\SimpleCalculator\Extensions\ExtendedOperations.dll
+C:\Users\Aleksander\Desktop\Projects\MEFLab\SimpleCalculator\Extensions\ExtendedOperations.pdb
+C:\Users\Aleksander\Desktop\Projects\MEFLab\ExtendedOperations\obj\Debug\ExtendedOperations.dll
+C:\Users\Aleksander\Desktop\Projects\MEFLab\ExtendedOperations\obj\Debug\ExtendedOperations.pdb
+C:\Users\Aleksander\Desktop\Projects\MEFLab\ExtendedOperations\obj\Debug\ExtendedOperations.csprojResolveAssemblyReference.cache

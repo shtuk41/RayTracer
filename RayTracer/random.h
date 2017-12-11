@@ -2,7 +2,4 @@
 
 #include <random>
 
-float get_random()
-{
-	return (float)rand() / RAND_MAX;
-}
+float get_random();
