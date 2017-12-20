@@ -3,16 +3,32 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RayTracer", "RayTracer\RayTracer.vcxproj", "{2FE87808-857F-4851-B49E-23729F0EC84B}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RayTracerParallel", "RayTracerParallel\RayTracerParallel.vcxproj", "{82167094-14D2-4EDB-82A3-11F1C3162656}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
 		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2FE87808-857F-4851-B49E-23729F0EC84B}.Debug|Win32.ActiveCfg = Debug|Win32
-		{2FE87808-857F-4851-B49E-23729F0EC84B}.Debug|Win32.Build.0 = Debug|Win32
+		{2FE87808-857F-4851-B49E-23729F0EC84B}.Debug|Win32.ActiveCfg = Release|x64
+		{2FE87808-857F-4851-B49E-23729F0EC84B}.Debug|Win32.Build.0 = Release|x64
+		{2FE87808-857F-4851-B49E-23729F0EC84B}.Debug|x64.ActiveCfg = Release|x64
+		{2FE87808-857F-4851-B49E-23729F0EC84B}.Debug|x64.Build.0 = Release|x64
 		{2FE87808-857F-4851-B49E-23729F0EC84B}.Release|Win32.ActiveCfg = Release|Win32
 		{2FE87808-857F-4851-B49E-23729F0EC84B}.Release|Win32.Build.0 = Release|Win32
+		{2FE87808-857F-4851-B49E-23729F0EC84B}.Release|x64.ActiveCfg = Release|x64
+		{2FE87808-857F-4851-B49E-23729F0EC84B}.Release|x64.Build.0 = Release|x64
+		{82167094-14D2-4EDB-82A3-11F1C3162656}.Debug|Win32.ActiveCfg = Release|x64
+		{82167094-14D2-4EDB-82A3-11F1C3162656}.Debug|Win32.Build.0 = Release|x64
+		{82167094-14D2-4EDB-82A3-11F1C3162656}.Debug|x64.ActiveCfg = Release|x64
+		{82167094-14D2-4EDB-82A3-11F1C3162656}.Debug|x64.Build.0 = Release|x64
+		{82167094-14D2-4EDB-82A3-11F1C3162656}.Release|Win32.ActiveCfg = Release|Win32
+		{82167094-14D2-4EDB-82A3-11F1C3162656}.Release|Win32.Build.0 = Release|Win32
+		{82167094-14D2-4EDB-82A3-11F1C3162656}.Release|x64.ActiveCfg = Release|x64
+		{82167094-14D2-4EDB-82A3-11F1C3162656}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
