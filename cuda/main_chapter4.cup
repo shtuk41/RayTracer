@@ -1,0 +1,136 @@
+#include <algorithm>
+#include <fstream>
+#include <iostream>
+
+#include <cuda.h>
+#include <cuda_runtime.h>
+#include <stdio.h>
+#include <ctime>
+
+#include <opencv2/opencv.hpp>
+#include "vec3.h"
+#include "ray.h"
+#include "color.h"
+#include "sphere.h"
+
+#define CHECK(call) \
+{                                                       \
+    const cudaError_t error = call;                     \
+    if (error != cudaSuccess)                           \
+    {                                                   \
+        printf("Error: %s,%d, ", __FILE__, __LINE__);   \
+        printf("code: %d, reason: %s\n", error, cudaGetErrorString(error));\
+        cudaDeviceReset();\
+        exit(1);\
+    }\
+}
+
+#define checkCudaErrors(val) check_cuda( (val), #val, __FILE__, __LINE__ )
+void check_cuda(cudaError_t result, char const *const func, const char *const file, int const line) {
+    if (result) {
+        std::cerr << "CUDA error = " << static_cast<unsigned int>(result) << " at " <<
+        file << ":" << line << " '" << func << "' \n";
+        // Make sure we call CUDA Device Reset before exiting
+        cudaDeviceReset();
+        exit(99);
+    }
+}
+
+
+
+__device__ __constant__ point3 origin_k;
+__device__ __constant__ vec3 lower_left_corner_k;
+__device__ __constant__ vec3 horizontal_k;
+__device__ __constant__ vec3 vertical_k;
+
+__global__ void render(vec3 *fb, int max_x, int max_y) {
+    int i = threadIdx.x + blockIdx.x * blockDim.x;
+    int j = threadIdx.y + blockIdx.y * blockDim.y;
+    if((i >= max_x) || (j >= max_y)) return;
+    int pixel_index = j*max_x + i;
+    
+    float u = float(i) / (max_x - 1);
+    float v = float(j) / (max_y - 1);
+    
+    ray r(origin_k, lower_left_corner_k + u * horizontal_k + v*vertical_k - origin_k);
+    
+    fb[pixel_index] = ray_color(r);
+}
+
+
+
+int main(int argc, char **argv)
+{  
+    //image
+    const float aspect_ratio = 16.0f / 9.0f;
+    const int image_width = 4000;
+    const int image_height = static_cast<int>(image_width / aspect_ratio);
+    
+    //camera
+    float viewport_height = 2.0f;
+    float viewport_width = aspect_ratio * viewport_height;
+    float focal_length = 1.0f;
+    
+    point3 origin = point3(0,0,0);
+    vec3 horizontal = vec3(viewport_width,0,0);
+    vec3 vertical = vec3(0, viewport_height, 0);
+    vec3 lower_left_corner = origin - horizontal /  2 - vertical / 2 - vec3(0,0,focal_length);
+    
+    CHECK(cudaMemcpyToSymbol(origin_k, &origin, sizeof(point3), size_t(0),cudaMemcpyHostToDevice));
+    CHECK(cudaMemcpyToSymbol(lower_left_corner_k, &lower_left_corner, sizeof(vec3), size_t(0),cudaMemcpyHostToDevice));
+    CHECK(cudaMemcpyToSymbol(horizontal_k, &horizontal, sizeof(vec3), size_t(0),cudaMemcpyHostToDevice));
+    CHECK(cudaMemcpyToSymbol(vertical_k, &vertical, sizeof(vec3), size_t(0),cudaMemcpyHostToDevice));
+    
+    int nx = image_width;
+    int ny = image_height;
+    int num_pixels = nx*ny;
+    size_t fb_size = num_pixels*sizeof(vec3);
+
+    // allocate FB
+    vec3 *fb;
+    CHECK(cudaMallocManaged((void **)&fb, fb_size));
+     
+    int tx = 32;
+    int ty = 32;
+    
+    // Render our buffer
+    dim3 blocks(nx/tx+1,ny/ty+1);
+    dim3 threads(tx,ty);
+    render<<<blocks, threads>>>(fb, nx, ny);
+    CHECK(cudaGetLastError());
+    CHECK(cudaDeviceSynchronize());
+    
+    // Output FB as Image
+    std::ofstream imageFile;
+    
+    imageFile.open("imageFile.ppm");
+    
+    if (!imageFile.is_open())
+    {
+        std::cout << "unable to open file" << std::endl;
+        return -1;
+    }
+    
+    imageFile << "P3\n" << nx << " " << ny << "\n255\n";
+    for (int j = ny-1; j >= 0; j--) {
+        for (int i = 0; i < nx; i++) {
+            size_t pixel_index = j*nx + i;
+                        
+            write_color(imageFile, fb[pixel_index]);
+            
+            //imageFile << ir << " " << ig << " " << ib << "\n";
+        }
+    }
+    
+    imageFile.close();
+    
+    checkCudaErrors(cudaFree(fb));
+    
+    return 0;
+
+}
+
+
+
+
+        
