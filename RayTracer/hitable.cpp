@@ -1,9 +1,9 @@
-#include "stdafx.h"
+#include <limits>
 #include "hitable.h"
 #include "hitable_list.h"
 #include "material.h"
 
-#define M_PI 3.14159265359f
+#define FLT_MAX std::numeric_limits<float>::max()
 
 bool xy_rect::hit(const ray&r, float t0, float t1, hit_record &rec) const
 {

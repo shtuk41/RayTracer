@@ -1,4 +1,0 @@
-C:\Users\Aleksander\Desktop\Projects\MEFLab\SimpleCalculator\bin\Debug\SimpleCalculator.exe
-C:\Users\Aleksander\Desktop\Projects\MEFLab\SimpleCalculator\bin\Debug\SimpleCalculator.pdb
-C:\Users\Aleksander\Desktop\Projects\MEFLab\SimpleCalculator\obj\x86\Debug\SimpleCalculator.exe
-C:\Users\Aleksander\Desktop\Projects\MEFLab\SimpleCalculator\obj\x86\Debug\SimpleCalculator.pdb

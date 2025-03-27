@@ -1,13 +1,12 @@
-
-CUDA_PATH=/usr/local/cuda-9.1/bin
-HOST_COMPILER=g++ -std=c++11
-NVCC=$(CUDA_PATH)/nvcc -ccbin $(HOST_COMPILER)
-GENCODE_FLAGS  = -gencode arch=compute_60,code=sm_60
+CUDA_PATH=/usr/local/cuda/bin
+HOST_COMPILER=g++ -std=c++17
+NVCC=$(CUDA_PATH)/nvcc $(NVCCFLAGS) -ccbin $(HOST_COMPILER)
+GENCODE_FLAGS=-arch=compute_61 -code=sm_61
 CFLAGS=-g -G
-OPENCV_INCLUDE=/usr/local/include
-CUDA_INCLUDE=/usr/local/cuda-9.1/include
-CUDA_LIB=/usr/local/cuda-9.1/lib64
-OPENCV_LIB=/usr/local/lib
+OPENCV_INCLUDE=/usr/include/opencv4
+CUDA_INCLUDE=/usr/local/cuda/include
+CUDA_LIB=/usr/local/cuda/lib64
+OPENCV_LIB=/usr/lib/x86_64-linux-gnu
 
 all:
 	$(NVCC) $(GENCODE_FLAGS) -I$(OPENCV_INCLUDE) -I$(CUDA_INCLUDE) -L$(CUDA_LIB) \

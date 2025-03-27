@@ -1,8 +1,6 @@
 // RayTracer.cpp : Defines the entry point for the console application.
 //
 
-#include "stdafx.h"
-
 #include <float.h>
 #include <fstream>
 #include <time.h>
@@ -75,7 +73,7 @@ hitable * simple_light()
 }
 
 
-int _tmain(int argc, _TCHAR* argv[])
+int main()
 {
 	srand((unsigned int)time(NULL));
 
@@ -136,8 +134,6 @@ int _tmain(int argc, _TCHAR* argv[])
 	}
 
 	std::cout << "Total time: " << (float)(clock() - start) / CLOCKS_PER_SEC << std::endl;
-
-	system("pause");
 
 	return 0;
 }

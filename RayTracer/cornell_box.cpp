@@ -1,8 +1,6 @@
 // RayTracer.cpp : Defines the entry point for the console application.
 //
 
-#include "stdafx.h"
-
 #include <float.h>
 #include <fstream>
 #include <time.h>
@@ -116,14 +114,11 @@ hitable *cornell_smoke()
 	list[i++] = new constant_medium(b1,0.01f, new constant_texture(vec3(1.0f, 1.0f, 1.0f)));
 	list[i++] = new constant_medium(b2,0.01f, new constant_texture(vec3(0.0f, 0.0f, 0.0f)));
 
-
 	return new hitable_list(list,i);
 
 }
 
-
-
-int _tmain(int argc, _TCHAR* argv[])
+int main()
 {
 	srand((unsigned int)time(NULL));
 
@@ -186,8 +181,6 @@ int _tmain(int argc, _TCHAR* argv[])
 	}
 
 	std::cout << "Total time: " << (float)(clock() - start) / CLOCKS_PER_SEC << std::endl;
-
-	system("pause");
 
 	return 0;
 }

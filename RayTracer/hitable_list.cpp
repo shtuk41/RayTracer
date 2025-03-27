@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "hitable_list.h"
 
 

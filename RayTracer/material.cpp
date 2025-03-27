@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "material.h"
 
 vec3 material::emitted(float u, float v, const vec3&p) const 

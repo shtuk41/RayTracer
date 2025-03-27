@@ -1,8 +1,6 @@
 // RayTracer.cpp : Defines the entry point for the console application.
 //
 
-#include "stdafx.h"
-
 #include <float.h>
 #include <fstream>
 #include <time.h>
@@ -82,7 +80,7 @@ hitable* random_scene()
 }
 
 
-int _tmain(int argc, _TCHAR* argv[])
+int main()
 {
 
 	srand((unsigned int)time(NULL));

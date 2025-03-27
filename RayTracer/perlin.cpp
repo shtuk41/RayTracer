@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "perlin.h"
 
 void permute(int *p, int n)

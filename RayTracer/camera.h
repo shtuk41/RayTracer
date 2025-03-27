@@ -3,8 +3,6 @@
 #include "ray.h"
 #include "random.h"
 
-#define M_PI 3.14159265359f
-
 vec3 random_in_unit_disk()
 {
 	vec3 p;

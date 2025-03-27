@@ -32,7 +32,7 @@ public:
 		return true;
 	}*/
 
-	inline bool aabb::hit(const ray&r, float tmin, float tmax) const
+	inline bool hit(const ray&r, float tmin, float tmax) const
 	{
 		for (int a = 0; a < 3; a++)
 		{
